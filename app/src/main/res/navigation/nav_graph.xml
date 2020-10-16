@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/breedsFragment"
+        android:name="com.shop.catganisation.ui.main.fragment.BreedsFragment"
+        android:label="breeds_fragment"
+        tools:layout="@layout/breeds_fragment">
+        <action
+            android:id="@+id/action_breedsFragment_to_breedDetailsFragment"
+            app:destination="@id/breedDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/breedDetailsFragment"
+        android:name="com.shop.catganisation.ui.main.fragment.BreedDetailsFragment"
+        android:label="BreedDetailsFragment" />
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.shop.catganisation.ui.main.fragment.SplashFragment"
+        android:label="SplashFragment">
+        <action
+            android:id="@+id/action_splashFragment_to_breedsFragment"
+            app:destination="@id/breedsFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>
