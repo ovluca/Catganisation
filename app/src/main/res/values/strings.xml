@@ -2,4 +2,6 @@
     <string name="app_name">CATganisation</string>
     <string name="loading">Loading...</string>
     <string name="search_by_country">Search by country</string>
+    <string name="login">Login</string>
+    <string name="required">Required!</string>
 </resources>

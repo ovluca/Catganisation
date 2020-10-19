@@ -6,10 +6,10 @@ import com.shop.catganisation.database.CatganisationDatabase
 import com.shop.catganisation.model.Breed
 import com.shop.catganisation.model.BreedAndImage
 import com.shop.catganisation.model.Image
+import com.shop.catganisation.model.Login
 import com.shop.catganisation.network.CatsApi
 import io.reactivex.Maybe
 import io.reactivex.Observable
-import io.reactivex.Single
 import retrofit2.Call
 import javax.inject.Inject
 
@@ -35,8 +35,12 @@ class CatsRepository @Inject constructor() {
         return breedDao.getBreeds()
     }
 
+    fun login(username: String, password: String): Observable<Login> {
+        return catsApi.login(username, password)
+    }
+
     fun getBreedsSync(): Call<List<Breed>> {
-        return catsApi.getBreedsSync()
+        return catsApi.getBreedsSync("e51009b2-ce0a-471b-bf44-1f97ab68be0c")
     }
 
     fun getBreedImageSync(breedId: String): Call<List<Image>> {

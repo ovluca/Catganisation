@@ -7,5 +7,4 @@ data class Image(
     val breeds: List<Breed>,
     val id: String,
     val url: String
-) {
-}
+)

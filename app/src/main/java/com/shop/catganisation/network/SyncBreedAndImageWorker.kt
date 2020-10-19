@@ -10,6 +10,7 @@ import com.shop.catganisation.model.Image
 import com.shop.catganisation.repository.CatsRepository
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
+import retrofit2.Response
 
 
 /**
@@ -25,8 +26,11 @@ class SyncBreedAndImageWorker @AssistedInject constructor(
     private val catsRepository: CatsRepository
 ) : Worker(appContext, params) {
     override fun doWork(): Result {
-        try {
-            val breeds: List<Breed> = catsRepository.getBreedsSync().execute().body()!!
+//        try {
+        val breedsResponse: Response<List<Breed>> = catsRepository.getBreedsSync().execute()
+
+        if (breedsResponse.isSuccessful) {
+            val breeds: List<Breed> = breedsResponse.body()!!
 
             breeds.forEach { breed ->
                 val images: List<Image> =
@@ -45,11 +49,17 @@ class SyncBreedAndImageWorker @AssistedInject constructor(
                 )
                 catsRepository.breedDao.insertBreed(breed = breedAndImage)
             }
-
             return Result.success()
-        } catch (exception: Exception) {
+        } else {
+            val error = breedsResponse.errorBody()
             return Result.failure()
         }
+
+
+//        } catch (exception: Exception) {
+//            exception.printStackTrace()
+//            return Result.failure()
+//        }
     }
 
     @AssistedInject.Factory

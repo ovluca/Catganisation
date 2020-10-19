@@ -2,7 +2,6 @@ package com.shop.catganisation.viewmodel
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import com.shop.catganisation.model.BreedAndImage
 import com.shop.catganisation.repository.CatsRepository
 import com.shop.catganisation.ui.main.adapter.BreedsAdapter
@@ -30,9 +29,18 @@ class BreedsViewModel @Inject constructor(application: Application) : BaseViewMo
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { result -> onRetrieveBreedsListSuccess(result) },
-                { onRetrieveBreedsListError() }
+                { onRetrieveBreedsListError() }, { onConnectionSuccess() }, { onConnectionError() }
             )
     }
+
+    private fun onConnectionError() {
+        Log.d("tag", "onRetrieveBreedsListError")
+    }
+
+    private fun onConnectionSuccess() {
+        Log.d("tag", "onRetrieveBreedsListError")
+    }
+
 
     private fun onRetrieveBreedsListError() {
         Log.d("tag", "onRetrieveBreedsListError")

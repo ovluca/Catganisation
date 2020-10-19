@@ -2,6 +2,7 @@ package com.shop.catganisation.di.module
 
 import com.shop.catganisation.BuildConfig
 import com.shop.catganisation.network.CatsApi
+import com.shop.catganisation.utils.MockInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -10,7 +11,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 /**
@@ -50,6 +51,7 @@ object NetworkModule {
 
         val httpClient = OkHttpClient.Builder()
         httpClient.addInterceptor(loggingInterceptor)
+        httpClient.addInterceptor(MockInterceptor())
 //        httpClient.addInterceptor(object : Interceptor {
 //            @Throws(IOException::class)
 //            override fun intercept(chain: Interceptor.Chain): Response {
@@ -69,7 +71,7 @@ object NetworkModule {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.SERVER_URL)
             .client(client)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .build()
     }

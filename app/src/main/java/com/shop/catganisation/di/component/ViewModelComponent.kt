@@ -4,6 +4,7 @@ import com.shop.catganisation.di.module.DatabaseModule
 import com.shop.catganisation.di.module.NetworkModule
 import com.shop.catganisation.viewmodel.BreedDetailsViewModel
 import com.shop.catganisation.viewmodel.BreedsViewModel
+import com.shop.catganisation.viewmodel.LoginViewModel
 import com.shop.catganisation.viewmodel.SplashViewModel
 import dagger.Component
 import javax.inject.Singleton
@@ -19,6 +20,7 @@ interface ViewModelComponent {
     fun inject(breedsViewModel: BreedsViewModel)
     fun inject(breedDetailsViewModel: BreedDetailsViewModel)
     fun inject(splashViewModel: SplashViewModel)
+    fun inject(loginViewModel: LoginViewModel)
 
     @Component.Builder
     interface Builder {
